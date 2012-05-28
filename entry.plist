@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = "DictatorSettings";
+		cell = PSLinkCell;
+		detail = "DCPreferenceController";
+		icon = "Dictator.png";
+		isController = 1;
+		label = "Dictator";
+	};
+}

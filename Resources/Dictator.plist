@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>title</key>
+    <string>Dictator</string>
+    <key>entry</key>
+    <dict>
+      <key>cell</key>
+      <string>PSLinkCell</string>
+      <key>icon</key>
+      <string>Dictator.png</string>
+      <key>label</key>
+      <string>Dictator</string>
+    </dict>
+    <key>items</key>
+    <array>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>footerText</key>
+        <string>NOTE: not affect to preference app.</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <true/>
+        <key>defaults</key>
+        <string>jp.r-plus.Dictator</string>
+        <key>key</key>
+        <string>Enabled</string>
+        <key>label</key>
+        <string>Enabled</string>
+        <key>PostNotification</key>
+        <string>jp.r-plus.Dictator.settingschanged</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>label</key>
+        <string>Dictation Language</string>
+        <key>footerText</key>
+        <string>This auto generated list is compatible for future iOS update.</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSLinkListCell</string>
+        <key>default</key>
+        <string>en_US</string>
+        <key>defaults</key>
+        <string>jp.r-plus.Dictator</string>
+        <key>key</key>
+        <string>Lang</string>
+        <key>label</key>
+        <string>Lang</string>
+        <key>PostNotification</key>
+        <string>jp.r-plus.Dictator.settingschanged</string>
+        <key>detail</key>
+        <string>PSListItemsController</string>
+        <key>valuesDataSource</key>
+        <string>source:</string>
+        <key>titlesDataSource</key>
+        <string>source:</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>footerText</key>
+        <string>Author: @r_plus</string>
+      </dict>
+    </array>
+  </dict>
+</plist>

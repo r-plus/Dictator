@@ -1,0 +1,13 @@
+Package: jp.r-plus.dictator
+Name: Dictator
+Depends: mobilesubstrate, firmware(>= 5.1), gsc.dictation
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Force dictation language to use in all keyboard type.
+Maintainer: BigBoss <bigboss@thebigboss.org>
+Author: r_plus <anasthasia.r+dictator@gmail.com>
+Section: Tweaks
+dev: rplus
+Priority: optional
+Sponsor: thebigboss.org <http://thebigboss.org>
+Icon: file:///Library/PreferenceBundles/DictatorSettings.bundle/Dictator@2x.png
