@@ -26,15 +26,8 @@ __attribute__((visibility("hidden")))
 	return _specifiers;
 }
 
-- (NSArray *)source:(id)target
-{
-  NSMutableArray *array = [NSMutableArray array];
-
-  for (NSString *identifier in [[UIKeyboardInputModeController sharedInputModeController] supportedInputModeIdentifiers])
-    if ([[objc_getClass("UIDictationController") sharedInstance] supportsInputMode:identifier error:nil])
-      [array addObject:identifier];
-
-  return array;
+- (NSArray *)source:(id)target {
+  return [[UIKeyboardInputModeController sharedInputModeController] supportedInputModeIdentifiers];
 }
 
 @end

@@ -18,8 +18,6 @@
       <dict>
         <key>cell</key>
         <string>PSGroupCell</string>
-        <key>footerText</key>
-        <string>NOTE: not affect to preference app.</string>
       </dict>
       <dict>
         <key>cell</key>
@@ -41,7 +39,7 @@
         <key>label</key>
         <string>Dictation Language</string>
         <key>footerText</key>
-        <string>This auto generated list is compatible for future iOS update.</string>
+        <string>You should select available language of Siri(dictation) supported on latest iOS.</string>
       </dict>
       <dict>
         <key>cell</key>

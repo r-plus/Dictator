@@ -13,7 +13,7 @@ static NSString *BCP47LanguageCode(NSString *identifier)
     if ([identifier rangeOfString:@"-"].location == NSNotFound)
       [im appendString:[identifier substringWithRange:NSMakeRange(3, [identifier length] - 3)]];
     else
-      [im appendString:[identifier substringWithRange:NSMakeRange(3, [identifier rangeOfString:@"-"].location -3)]];
+      [im appendString:[identifier substringWithRange:NSMakeRange(3, [identifier rangeOfString:@"-"].location - 3)]];
   }
   return im;
 }
@@ -21,10 +21,16 @@ static NSString *BCP47LanguageCode(NSString *identifier)
 %hook UIDictationController
 - (NSString *)assistantCompatibleLanguageCodeForLanguage:(NSString *)lang region:(NSString *)originRegion
 {
-  if (dictatorEnabled && ![[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Preferences"])
+  NSString *tmp = %orig;
+  if (dictatorEnabled)
     return BCP47LanguageCode(dictatorLang);
   else
-    return %orig;
+    return tmp;
+}
+- (BOOL)supportsInputMode:(id)arg1 error:(id*)arg2
+{
+  BOOL tmp = %orig;
+  return dictatorEnabled ? YES : tmp;
 }
 %end
 

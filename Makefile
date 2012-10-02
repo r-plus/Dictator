@@ -1,3 +1,5 @@
+ARCHS = armv7
+TARGET = iphone:latest:5.1
 include theos/makefiles/common.mk
 
 TWEAK_NAME = Dictator
