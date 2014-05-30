@@ -19,6 +19,16 @@ static NSString *BCP47LanguageCode(NSString *identifier)
 }
 
 %hook UIDictationController
+// iOS 7.0 -
+- (NSString *)assistantCompatibleLanguageCodeForInputMode:(NSString *)langAndKeyboard//en_US@hw=US;sw=QWERTY
+{
+    NSString *tmp = %orig;
+    if (dictatorEnabled)
+        return BCP47LanguageCode(dictatorLang);
+    else
+        return tmp;
+}
+// iOS 5.1 - 6.1
 - (NSString *)assistantCompatibleLanguageCodeForLanguage:(NSString *)lang region:(NSString *)originRegion
 {
     NSString *tmp = %orig;
@@ -50,8 +60,8 @@ static void PostNotification(CFNotificationCenterRef center, void *observer, CFS
 
 %ctor
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, PostNotification, CFSTR("jp.r-plus.Dictator.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-    LoadSettings();
-    [pool drain];
+    @autoreleasepool {
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, PostNotification, CFSTR("jp.r-plus.Dictator.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+        LoadSettings();
+    };
 }
