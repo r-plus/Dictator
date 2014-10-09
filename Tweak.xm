@@ -18,31 +18,29 @@ static NSString *BCP47LanguageCode(NSString *identifier)
     return im;
 }
 
-%hook UIDictationController
-// iOS 7.0 -
-- (NSString *)assistantCompatibleLanguageCodeForInputMode:(NSString *)langAndKeyboard//en_US@hw=US;sw=QWERTY
+extern "C" NSArray *AFPreferencesSupportedLanguages();
+
+// Does work for iOS 5+
+NSArray *(*old_AFPreferencesSupportedLanguages)();
+NSArray *replaced_AFPreferencesSupportedLanguages()
 {
-    NSString *tmp = %orig;
-    if (dictatorEnabled)
-        return BCP47LanguageCode(dictatorLang);
-    else
-        return tmp;
+	NSMutableArray *array = [old_AFPreferencesSupportedLanguages() mutableCopy];
+	NSString *languageCode = BCP47LanguageCode(dictatorLang);
+	if (![array containsObject:languageCode])
+		[array addObject:languageCode];
+	return array;
 }
-// iOS 5.1 - 6.1
-- (NSString *)assistantCompatibleLanguageCodeForLanguage:(NSString *)lang region:(NSString *)originRegion
-{
-    NSString *tmp = %orig;
-    if (dictatorEnabled)
-        return BCP47LanguageCode(dictatorLang);
-    else
-        return tmp;
-}
+
+// I think this is not needed
+/*%hook UIDictationController
+
 - (BOOL)supportsInputMode:(id)arg1 error:(id*)arg2
 {
     BOOL tmp = %orig;
     return dictatorEnabled ? YES : tmp;
 }
-%end
+
+%end*/
 
 static void LoadSettings()
 {	
@@ -63,5 +61,6 @@ static void PostNotification(CFNotificationCenterRef center, void *observer, CFS
     @autoreleasepool {
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, PostNotification, CFSTR("jp.r-plus.Dictator.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
         LoadSettings();
+        MSHookFunction((void *)AFPreferencesSupportedLanguages, (void *)replaced_AFPreferencesSupportedLanguages, (void **)&old_AFPreferencesSupportedLanguages);
     };
 }
