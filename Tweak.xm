@@ -61,5 +61,6 @@ static void PostNotification(CFNotificationCenterRef center, void *observer, CFS
     @autoreleasepool {
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, PostNotification, CFSTR("jp.r-plus.Dictator.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
         LoadSettings();
+        MSHookFunction((void *)AFPreferencesSupportedLanguages, (void *)replaced_AFPreferencesSupportedLanguages, (void **)&old_AFPreferencesSupportedLanguages);
     };
 }
