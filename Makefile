@@ -1,4 +1,4 @@
-ARCHS = armv7 arm64
+ARCHS = armv7 armv7s arm64
 TARGET = iphone::5.1
 include theos/makefiles/common.mk
 
@@ -11,7 +11,7 @@ BUNDLE_NAME = DictatorSettings
 DictatorSettings_FILES = DCPreferenceController.m
 DictatorSettings_INSTALL_PATH = /Library/PreferenceBundles
 DictatorSettings_FRAMEWORKS = UIKit
-DictatorSettings_PRIVATE_FRAMEWORKS = Preferences
+DictatorSettings_PRIVATE_FRAMEWORKS = AssistantServices Preferences
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 
