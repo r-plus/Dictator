@@ -25,7 +25,9 @@ NSArray *(*old_AFPreferencesSupportedLanguages)();
 NSArray *replaced_AFPreferencesSupportedLanguages()
 {
 	NSMutableArray *array = [old_AFPreferencesSupportedLanguages() mutableCopy];
-	[array addObject:BCP47LanguageCode(dictatorLang)];
+	NSString *languageCode = BCP47LanguageCode(dictatorLang);
+	if (![array containsObject:languageCode])
+		[array addObject:languageCode];
 	return array;
 }
 
